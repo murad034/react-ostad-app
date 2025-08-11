@@ -6,25 +6,12 @@ on:
     branches: [main]
 
 jobs:
-  build:
+  read_hello_file:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: "22"
-      - name: Install dependencies
+      - name: Git Clone
+        uses: actions/checkout@v4
+        
+      - name: Read hello.txt
         run: |
-          npm ci
-      - name: Build ostad react
-        run: |
-          npm run build
-
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
-    steps:
-      - name: Deploy to production
-        run: echo "Deploying to production server..."
+          cat hello.txt
